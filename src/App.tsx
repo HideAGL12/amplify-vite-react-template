@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
+import "./App.css";
 
 const client = generateClient<Schema>();
 
@@ -30,12 +31,16 @@ function App() {
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
-          <li 
-            onClick={() => deleteTodo(todo.id)}
-            key={todo.id}
-          >
+          <li key={todo.id} className="todo-item">
           {todo.content}
-          </li>))}
+          <button
+            className="delete-task-button"
+            onClick={() => deleteTodo(todo.id)}
+          >
+            削除
+          </button>
+        </li>
+      ))}
       </ul>
       <div>
         🥳 App successfully hosted. Try creating a new todo.
